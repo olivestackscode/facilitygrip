@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { Bar } from 'react-chartjs-2';
 import './App.css';
 
 function App() {
-  // Sample data
   const [facilities, setFacilities] = useState([
     { id: 1, type: 'Media', status: 'Good', needsReplacement: false },
     { id: 2, type: 'Furniture', status: 'Bad', needsReplacement: true },
@@ -11,16 +11,12 @@ function App() {
     { id: 5, type: 'Media', status: 'Bad', needsReplacement: true },
   ]);
 
-  // Total number of facilities
+  const [newFacility, setNewFacility] = useState({ type: '', status: '', needsReplacement: false });
+
   const totalFacilities = facilities.length;
-
-  // Total bad facilities
   const badFacilities = facilities.filter((facility) => facility.status === 'Bad').length;
-
-  // Facilities needing replacement
   const facilitiesNeedingReplacement = facilities.filter((facility) => facility.needsReplacement).length;
 
-  // Group facilities by type
   const facilityTypes = facilities.reduce((acc, facility) => {
     if (!acc[facility.type]) {
       acc[facility.type] = 0;
@@ -29,30 +25,77 @@ function App() {
     return acc;
   }, {});
 
+  // Bar chart data
+  const chartData = {
+    labels: Object.keys(facilityTypes),
+    datasets: [
+      {
+        label: 'Number of Facilities',
+        data: Object.values(facilityTypes),
+        backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe'],
+      },
+    ],
+  };
+
+  // Add new facility to the list
+  const addFacility = () => {
+    const id = facilities.length + 1;
+    setFacilities([...facilities, { id, ...newFacility }]);
+    setNewFacility({ type: '', status: '', needsReplacement: false });
+  };
+
   return (
     <div className="App">
       <h1>Facilities Dashboard</h1>
-      <div className="dashboard">
-        <div className="stat">
-          <h3>Total Facilities</h3>
-          <p>{totalFacilities}</p>
-        </div>
-        <div className="stat">
-          <h3>Bad Facilities</h3>
-          <p>{badFacilities}</p>
-        </div>
-        <div className="stat">
-          <h3>Facilities Needing Replacement</h3>
-          <p>{facilitiesNeedingReplacement}</p>
-        </div>
-        <div className="stat">
-          <h3>Facilities by Type</h3>
-          <ul>
-            {Object.entries(facilityTypes).map(([type, count]) => (
-              <li key={type}>{type}: {count}</li>
+      <div className="snapshot">
+        <Bar data={chartData} />
+      </div>
+      <div className="facility-list">
+        <h2>Facilities List</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th>Needs Replacement</th>
+            </tr>
+          </thead>
+          <tbody>
+            {facilities.map((facility) => (
+              <tr key={facility.id}>
+                <td>{facility.id}</td>
+                <td>{facility.type}</td>
+                <td>{facility.status}</td>
+                <td>{facility.needsReplacement ? 'Yes' : 'No'}</td>
+              </tr>
             ))}
-          </ul>
-        </div>
+          </tbody>
+        </table>
+      </div>
+      <div className="add-facility">
+        <h3>Add New Facility</h3>
+        <input
+          type="text"
+          placeholder="Type (e.g., Media)"
+          value={newFacility.type}
+          onChange={(e) => setNewFacility({ ...newFacility, type: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Status (Good/Bad)"
+          value={newFacility.status}
+          onChange={(e) => setNewFacility({ ...newFacility, status: e.target.value })}
+        />
+        <label>
+          <input
+            type="checkbox"
+            checked={newFacility.needsReplacement}
+            onChange={(e) => setNewFacility({ ...newFacility, needsReplacement: e.target.checked })}
+          />
+          Needs Replacement
+        </label>
+        <button onClick={addFacility}>Add Facility</button>
       </div>
     </div>
   );
