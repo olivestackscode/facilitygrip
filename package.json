@@ -1,29 +1,28 @@
 {
   "name": "FacilityGrip",
-  "version": "1.0.0",
-  "description": "A React app for taking stock of facilities.",
-  "main": "index.js",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "react-dom": "^18.2.0",
+    "react-geocode": "^1.0.0-alpha.1",
+    "react-scripts": "^5.0.1",
+    "react-webcam": "^7.2.0",
+    "web-vitals": "^2.1.4"
+  },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "keywords": [
-    "react",
-    "facilities",
-    "dashboard",
-    "stock-management"
-  ],
-  "author": "Jerry",
-  "license": "MIT",
-  "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "^5.0.0"
-  },
-  "devDependencies": {
-    "babel-eslint": "^10.1.0"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
