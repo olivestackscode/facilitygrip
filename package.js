@@ -1,5 +1,5 @@
 {
-  "name": "facilities-dashboard",
+  "name": "Facility Grip",
   "version": "1.0.0",
   "description": "A React app for taking stock of facilities.",
   "main": "index.js",
