@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FacilityGrip</title>
+    <title>FacilityGrip Preloader</title>
     <style>
         /* Cornflower blue theme color */
         :root {
@@ -70,6 +70,16 @@
                 transform: scale(1);
             }
         }
+
+        /* Hidden elements initially */
+        .transition-text {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .transition-text.active {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -80,16 +90,28 @@
             <span class="dot"></span>
             <span class="dot"></span>
         </div>
-        <p>Loading facilities: RCCG Daystar Parish</p>
+        <p id="loadingText" class="transition-text">Manage all your facilities</p>
+        <p id="manageFacilitiesText" class="transition-text">Loading facilities of RCCG Daystar Parish</p>
     </div>
 
     <script>
-        // Simulate page loading before redirecting to index.php
         document.addEventListener("DOMContentLoaded", function() {
-            // You can set a timeout to simulate loading time, e.g., 3 seconds
+            // Simulate the first loading message for 3 seconds
             setTimeout(function() {
-                window.location.href = "https://olivestacks.online/gripp/index"; // Redirect to index.php
-            }, 10000); // 10-second delay
+                // Show "Manage all your facilities" after the dots animation
+                document.getElementById("loadingText").classList.add("active");
+            }, 3000); // Delay 3 seconds
+
+            // Simulate the second message transition after another 3 seconds
+            setTimeout(function() {
+                // Show the "Manage all your facilities" text
+                document.getElementById("manageFacilitiesText").classList.add("active");
+            }, 6000); // Delay 6 seconds total
+
+            // Redirect to index.php after 9 seconds
+            setTimeout(function() {
+                window.location.href = "index.php";
+            }, 9000); // Delay 9 seconds total
         });
     </script>
 </body>
