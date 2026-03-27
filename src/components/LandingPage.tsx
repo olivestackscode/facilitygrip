@@ -7,79 +7,232 @@ interface LandingPageProps {
 
 const LandingPage: React.FC<LandingPageProps> = ({ onLaunch, onDocs }) => {
   return (
-    <div className="min-h-screen bg-[#0a0a0c] text-[#e4e4e7] font-sans selection:bg-primary/30">
-      <div className="max-w-[1000px] mx-auto px-8 py-16 md:py-32">
-        <header className="text-center mb-16 animate-in fade-in slide-in-from-top-4 duration-1000">
-          <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-emerald-400 bg-clip-text text-transparent">
-            FacilityGrip AI
-          </h1>
-          <p className="font-mono text-zinc-500 text-lg md:text-xl tracking-widest uppercase">
-            /system/gateway/integration_tools
-          </p>
+    <div className="landing-wrapper">
+      <style>{`
+        .landing-wrapper {
+          --bg: #0a0a0c;
+          --card: #121214;
+          --primary: #3b82f6;
+          --secondary: #10b981;
+          --border: #1f1f23;
+          --text: #e4e4e7;
+          --text-dim: #71717a;
+          
+          background-color: var(--bg);
+          color: var(--text);
+          font-family: 'Inter', sans-serif;
+          line-height: 1.6;
+          min-height: 100vh;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          margin: 0;
+          padding: 0;
+          z-index: 9999;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            flex-grow: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .landing-h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            background: linear-gradient(to right, #60a5fa, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .landing-h1 { font-size: 2.5rem; }
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.1);
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .code-block {
+            background: #000;
+            border-radius: 1rem;
+            padding: 1.25rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: #d1d5db;
+            border: 1px solid var(--border);
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .red { background: #ef4444; opacity: 0.3; }
+        .yellow { background: #f59e0b; opacity: 0.3; }
+        .green { background: #10b981; opacity: 0.3; }
+
+        pre { margin: 0; }
+        code { color: var(--primary); }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background: transparent;
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text);
+            color: var(--text);
+        }
+
+        .actions {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-dim);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .tag {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+        }
+      `}</style>
+      
+      <div className="container">
+        <header>
+            <h1 className="landing-h1">FacilityGrip AI</h1>
+            <p className="subtitle">/system/gateway/integration_tools</p>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
-          <div className="glass rounded-[2.5rem] p-10 border border-zinc-800/50 hover:border-primary/30 transition-all duration-500 group">
-            <div className="flex items-center gap-3 mb-8">
-              <span className="bg-primary/10 text-primary text-[10px] px-3 py-1 rounded-full font-mono font-bold uppercase tracking-wider border border-primary/20">SDK</span>
-              <h2 className="text-xl font-bold">Python Integration</h2>
+        <div className="grid">
+            <div className="card">
+                <h2><span className="tag">SDK</span> Python Integration</h2>
+                <div className="code-block">
+                    <div className="code-header">
+                        <div className="dot red"></div>
+                        <div className="dot yellow"></div>
+                        <div className="dot green"></div>
+                    </div>
+                    <pre><code>from facilitygrip import Client<br/><br/>
+client = Client(key="sk_live_...")<br/>
+facility = client.attach("My_ORGANIZATION")<br/><br/>
+# Start AI Monitoring<br/>
+facility.monitor_hvac()</code></pre>
+                </div>
             </div>
-            
-            <div className="bg-black/40 rounded-3xl p-6 font-mono text-sm border border-zinc-800/50 group-hover:border-primary/20 transition-colors">
-              <div className="flex gap-1.5 mb-6">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-500/20"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-green-500/20"></div>
-              </div>
-              <pre className="text-zinc-400">
-                <code className="text-blue-400">from</code> facilitygrip <code className="text-blue-400">import</code> Client<br/><br/>
-                client = Client(key=<code className="text-emerald-400">"sk_live_..."</code>)<br/>
-                facility = client.attach(<code className="text-emerald-400">"My_ORGANIZATION"</code>)<br/><br/>
-                <code className="text-zinc-600"># Start AI Monitoring</code><br/>
-                facility.monitor_hvac()
-              </pre>
-            </div>
-          </div>
 
-          <div className="glass rounded-[2.5rem] p-10 border border-zinc-800/50 hover:border-primary/30 transition-all duration-500 group">
-            <div className="flex items-center gap-3 mb-8">
-              <span className="bg-emerald-500/10 text-emerald-400 text-[10px] px-3 py-1 rounded-full font-mono font-bold uppercase tracking-wider border border-emerald-500/20">API</span>
-              <h2 className="text-xl font-bold">REST Endpoint</h2>
+            <div className="card">
+                <h2><span className="tag">API</span> REST Endpoint</h2>
+                <div className="code-block">
+                    <div className="code-header">
+                        <div className="dot red"></div>
+                        <div className="dot yellow"></div>
+                        <div className="dot green"></div>
+                    </div>
+                    <pre><code>curl -X POST "/ml/predict" \<br/>
+-H "Authorization: Bearer ..." \<br/>
+-d '{"{"}"sensor_id": "PWR-01"{"}"}'</code></pre>
+                </div>
             </div>
-            
-            <div className="bg-black/40 rounded-3xl p-6 font-mono text-sm border border-zinc-800/50 group-hover:border-emerald-500/20 transition-colors">
-              <div className="flex gap-1.5 mb-6">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-500/20"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-green-500/20"></div>
-              </div>
-              <pre className="text-zinc-400 uppercase tracking-tighter">
-                curl -X POST <code className="text-emerald-400">"/ml/predict"</code> \<br/>
-                -H <code className="text-emerald-400">"Auth: Bearer ..."</code> \<br/>
-                -d <code className="text-emerald-400">'{"{"}"sensor_id": "PWR-01"{"}"}'</code>
-              </pre>
-            </div>
-          </div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-center items-center gap-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-300">
-          <button 
-            onClick={onLaunch}
-            className="w-full md:w-auto px-10 py-5 bg-primary rounded-full font-bold text-lg hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all shadow-[0_0_40px_rgba(59,130,246,0.3)]"
-          >
-            Launch Dashboard
-          </button>
-          <button 
-            onClick={onDocs}
-            className="w-full md:w-auto px-10 py-5 glass border border-zinc-800 rounded-full font-bold text-lg hover:bg-zinc-800 hover:border-zinc-700 hover:scale-105 active:scale-95 transition-all text-zinc-400 hover:text-white"
-          >
-            Documentation
-          </button>
+        <div className="actions">
+            <div onClick={onLaunch} className="btn">Launch Dashboard</div>
+            <div onClick={onDocs} className="btn btn-outline">Documentation</div>
         </div>
       </div>
 
-      <footer className="text-center py-12 text-zinc-600 font-mono text-xs uppercase tracking-[0.2em] border-t border-zinc-900/50">
-        &copy; 2026 FacilityGrip AI. System Gateway v4.2.0-STABLE
+      <footer>
+          &copy; 2026 FacilityGrip AI. Open Source Facility Automation.
       </footer>
     </div>
   );
