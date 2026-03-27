@@ -1,77 +1,54 @@
-# Simple React JS Project
+# 🏢 FacilityGrip: AI-Powered Facility Automation
 
-## What is the use of this Repo
+FacilityGrip is an open-source, AI-driven facility management system designed for hotels, parks, churches, schools, and other large-scale infrastructures. Built with **Python** and **TensorFlow**, it provides real-time monitoring, predictive maintenance, and automated reporting to streamline operations.
 
-This Project is a Simple ReactJS Project which demonstrates the following
-1. Creating a Component in React
-2. Making HTTP calls
-3. Communicating between parent and child component
-4. Using Bootstrap along with React
-5. Using Basic Routing in React
+![FacilityGrip Dashboard](public/screenshot.png) *(Placeholder for UI screenshot)*
 
-The project Template can be used to build bigger projects
+## ✨ Features
 
-## Live Application URL
+- 🧠 **AI Anomaly Detection**: Uses TensorFlow autoencoders to identify unusual patterns in sensor data (HVAC vibrations, power surges, etc.).
+- 📊 **Predictive Maintenance**: Forecasts equipment failure before it happens, reducing downtime.
+- 🏢 **Multi-Facility Support**: Manage multiple buildings, rooms, and assets from a single dashboard.
+- 🐳 **Docker Ready**: Easy deployment via Docker and Docker Compose.
+- 💻 **Desktop Native**: Lightweight local installation script for Windows PCs.
+- 🎨 **Premium UI**: Modern, glassmorphic dashboard built with React and Tailwind CSS.
 
-### https://aditya-sridhar.github.io/simple-reactjs-app
-This URL has the application deployed in
+## 🚀 Getting Started
 
-## Prerequisites
+### Option 1: Local PC Installation (Windows)
 
-### Install Node JS
-Refer to https://nodejs.org/en/ to install nodejs
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/olivestackscode/facilitygrip.git
+   cd facilitygrip
+   ```
+2. Run the setup script:
+   ```powershell
+   ./setup.ps1
+   ```
+3. Start the system:
+   - Backend: `cd backend; ./venv/Scripts/python app/main.py`
+   - Frontend: `cd frontend; npm run dev`
 
-### Install create-react-app
-Install create-react-app npm package globally. This will help to easily run the project and also build the source files easily. Use the following command to install create-react-app
+### Option 2: Docker Deployment
 
+Deploy the entire stack with a single command:
 ```bash
-npm install -g create-react-app
+docker-compose up -d
 ```
-## Live Application URL
+The dashboard will be available at `http://localhost`.
 
-The Application is deployed in https://aditya-sridhar.github.io/simple-reactjs-app
+## 🛠 Tech Stack
 
-Click on the link to see the application
+- **Backend**: Python 3.10+, FastAPI, SQLAlchemy, TensorFlow 2.x
+- **Frontend**: React (TS), Vite, Tailwind CSS, Lucide Icons
+- **Database**: SQLite (Local) / PostgreSQL (Docker)
+- **Deployment**: Docker, Docker Compose
 
-## Cloning and Running the Application in local
+## 🤝 Contributing
 
-Clone the project into local
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for more details.
 
-Install all the npm packages. Go into the project folder and type the following command to install all npm packages
+## 📄 License
 
-```bash
-npm install
-```
-
-In order to run the application Type the following command
-
-```bash
-npm start
-```
-
-The Application Runs on **localhost:3000**
-
-## Application design
-
-#### Components
-
-1. **Customers** Component : This Component displays a list of customers. This Component gets the data from a json file in assets folder
-
-2. **CustomerDetails** Component : This Component Displays the details of the selected customer. This Component gets its data from a json file in assets folder as well. This Component is the Child Component of *Customers* Component
-
-#### HTTP client
-
-**axios** library is used to make HTTP Calls
-
-#### URL
-
-The application has just one url /customerlist which ties to *Customers* Component
-
-## Resources
-
-**create-react-app** : The following link has all the commands that can be used with create-react-app
-https://github.com/facebook/create-react-app
-
-**ReactJS** : Refer to https://reactjs.org/ to understand the concepts of ReactJS
-
-**React Bootstrap** : Refer to https://react-bootstrap.github.io/getting-started/introduction/ to understand how to use React Bootstrap
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

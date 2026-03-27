@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+tensorflow
+numpy
+pandas
+python-multipart
+python-dotenv
+scikit-learn
+matplotlib
+jinja2
+aiofiles
+pytest
+httpx
