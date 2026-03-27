@@ -4,6 +4,7 @@ import Sidebar from './components/Sidebar';
 import StatCard from './components/StatCard';
 import AIAlerts from './components/AIAlerts';
 import IntegrationTools from './components/IntegrationTools';
+import Documentation from './components/Documentation';
 import axios from 'axios';
 
 const App: React.FC = () => {
@@ -123,6 +124,8 @@ const App: React.FC = () => {
           </>
         ) : activeTab === 'integrations' ? (
           <IntegrationTools />
+        ) : activeTab === 'documentation' ? (
+          <Documentation />
         ) : (
           <div className="flex flex-col items-center justify-center h-[60vh] text-zinc-500">
             <h2 className="text-xl font-semibold mb-2">Page under development</h2>
