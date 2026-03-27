@@ -1,54 +1,73 @@
-# 🏢 FacilityGrip: AI-Powered Facility Automation
+# React + TypeScript + Vite
 
-FacilityGrip is an open-source, AI-driven facility management system designed for hotels, parks, churches, schools, and other large-scale infrastructures. Built with **Python** and **TensorFlow**, it provides real-time monitoring, predictive maintenance, and automated reporting to streamline operations.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-![FacilityGrip Dashboard](public/screenshot.png) *(Placeholder for UI screenshot)*
+Currently, two official plugins are available:
 
-## ✨ Features
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-- 🧠 **AI Anomaly Detection**: Uses TensorFlow autoencoders to identify unusual patterns in sensor data (HVAC vibrations, power surges, etc.).
-- 📊 **Predictive Maintenance**: Forecasts equipment failure before it happens, reducing downtime.
-- 🏢 **Multi-Facility Support**: Manage multiple buildings, rooms, and assets from a single dashboard.
-- 🐳 **Docker Ready**: Easy deployment via Docker and Docker Compose.
-- 💻 **Desktop Native**: Lightweight local installation script for Windows PCs.
-- 🎨 **Premium UI**: Modern, glassmorphic dashboard built with React and Tailwind CSS.
+## React Compiler
 
-## 🚀 Getting Started
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-### Option 1: Local PC Installation (Windows)
+## Expanding the ESLint configuration
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/olivestackscode/facilitygrip.git
-   cd facilitygrip
-   ```
-2. Run the setup script:
-   ```powershell
-   ./setup.ps1
-   ```
-3. Start the system:
-   - Backend: `cd backend; ./venv/Scripts/python app/main.py`
-   - Frontend: `cd frontend; npm run dev`
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-### Option 2: Docker Deployment
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-Deploy the entire stack with a single command:
-```bash
-docker-compose up -d
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-The dashboard will be available at `http://localhost`.
 
-## 🛠 Tech Stack
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-- **Backend**: Python 3.10+, FastAPI, SQLAlchemy, TensorFlow 2.x
-- **Frontend**: React (TS), Vite, Tailwind CSS, Lucide Icons
-- **Database**: SQLite (Local) / PostgreSQL (Docker)
-- **Deployment**: Docker, Docker Compose
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for more details.
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```

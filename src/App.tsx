@@ -5,12 +5,14 @@ import StatCard from './components/StatCard';
 import AIAlerts from './components/AIAlerts';
 import IntegrationTools from './components/IntegrationTools';
 import Documentation from './components/Documentation';
+import LandingPage from './components/LandingPage';
 import axios from 'axios';
+import { clsx } from 'clsx';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState(() => {
     const hash = window.location.hash.replace('#', '');
-    return ['dashboard', 'integrations', 'documentation', 'assets', 'monitoring', 'reports'].includes(hash) ? hash : 'dashboard';
+    return ['dashboard', 'integrations', 'documentation', 'assets', 'monitoring', 'reports', 'gateway'].includes(hash) ? hash : 'gateway';
   });
   const [systemStatus, setSystemStatus] = useState<any>(null);
 
@@ -42,36 +44,46 @@ const App: React.FC = () => {
   return (
     <div className="flex h-screen bg-background text-zinc-200 overflow-hidden">
       {/* Sidebar */}
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      {activeTab !== 'gateway' && <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />}
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto p-4 lg:p-8">
-        <header className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              FacilityGrip AI
-            </h1>
-            <p className="text-zinc-500 text-sm mt-1">Smart Facility Automation & Monitoring</p>
-          </div>
-          
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <input 
-                type="text" 
-                placeholder="Search facility..." 
-                className="bg-card border border-border rounded-full py-2 px-10 text-sm focus:outline-none focus:ring-1 focus:ring-primary w-64 glass"
-              />
-              <Search className="absolute left-3 top-2.5 w-4 h-4 text-zinc-500" />
+      <main className={clsx(
+        "flex-1 overflow-y-auto min-h-screen",
+        activeTab !== 'gateway' ? "p-4 lg:p-8 ml-0 lg:ml-64 bg-zinc-950/30 backdrop-blur-3xl" : "bg-[#0a0a0c]"
+      )}>
+        {activeTab !== 'gateway' && (
+          <header className="flex justify-between items-center mb-8">
+            <div>
+              <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                FacilityGrip AI
+              </h1>
+              <p className="text-zinc-500 text-sm mt-1">Smart Facility Automation & Monitoring</p>
             </div>
-            <button className="p-2 glass rounded-full hover:bg-zinc-800 transition-all border border-border">
-              <Bell className="w-5 h-5 text-zinc-400" />
-            </button>
-            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-accent border-2 border-border shadow-lg"></div>
-          </div>
-        </header>
+            
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                <input 
+                  type="text" 
+                  placeholder="Search facility..." 
+                  className="bg-card border border-border rounded-full py-2 px-10 text-sm focus:outline-none focus:ring-1 focus:ring-primary w-64 glass"
+                />
+                <Search className="absolute left-3 top-2.5 w-4 h-4 text-zinc-500" />
+              </div>
+              <button className="p-2 glass rounded-full hover:bg-zinc-800 transition-all border border-border">
+                <Bell className="w-5 h-5 text-zinc-400" />
+              </button>
+              <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-accent border-2 border-border shadow-lg"></div>
+            </div>
+          </header>
+        )}
 
         {/* Dashboard Content */}
-        {activeTab === 'dashboard' ? (
+        {activeTab === 'gateway' ? (
+          <LandingPage 
+            onLaunch={() => setActiveTab('dashboard')} 
+            onDocs={() => setActiveTab('documentation')} 
+          />
+        ) : activeTab === 'dashboard' ? (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               <StatCard 
