@@ -20,8 +20,11 @@ const IntegrationTools: React.FC = () => {
 
 client = Client(api_key="your_api_key")
 
+// Connect your facility
+facility = client.attach("My_ORGANIZATION")
+
 # Connect a smart HVAC sensor
-sensor = client.connect_sensor("HVAC-UNIT-01")
+sensor = facility.connect_sensor("HVAC-UNIT-01")
 
 # Enable AI monitoring
 sensor.enable_ai_anomaly_detection()
