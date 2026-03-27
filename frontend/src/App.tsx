@@ -8,8 +8,22 @@ import Documentation from './components/Documentation';
 import axios from 'axios';
 
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState(() => {
+    const hash = window.location.hash.replace('#', '');
+    return ['dashboard', 'integrations', 'documentation', 'assets', 'monitoring', 'reports'].includes(hash) ? hash : 'dashboard';
+  });
   const [systemStatus, setSystemStatus] = useState<any>(null);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (['dashboard', 'integrations', 'documentation', 'assets', 'monitoring', 'reports'].includes(hash)) {
+        setActiveTab(hash);
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   useEffect(() => {
     const fetchStatus = async () => {
