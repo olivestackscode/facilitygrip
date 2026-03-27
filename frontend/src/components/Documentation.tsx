@@ -1,5 +1,5 @@
 import React from 'react';
-import { Book, Terminal, Monitor, Box, Cloud, Activity, Code, Settings, HardDrive, Cpu, Github } from 'lucide-react';
+import { Book, Terminal, Monitor, Box, Cloud, Activity, Code, Settings } from 'lucide-react';
 
 const Documentation: React.FC = () => {
   const sections = [
@@ -11,7 +11,7 @@ const Documentation: React.FC = () => {
     },
     {
       id: 'github-clone',
-      icon: <Github className="w-5 h-5 text-blue-400" />,
+      icon: <Code className="w-5 h-5 text-blue-400" />,
       title: 'GitHub Clone',
       content: 'Best for developers who want to customize the system. \\n\\n1. `git clone https://github.com/olivestackscode/facilitygrip.git`\\n2. Run the `setup.ps1` script to install all dependencies automatically.'
     },
