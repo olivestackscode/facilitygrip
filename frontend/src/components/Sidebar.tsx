@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Package, Activity, FileText, Bell, Settings, LogOut } from 'lucide-react';
+import { Home, Package, Activity, FileText, Bell, Settings, LogOut, Code } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -15,6 +15,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ activeTab, setActiveTab }) => {
   const menuItems = [
     { id: 'dashboard', icon: Home, label: 'Dashboard' },
+    { id: 'integrations', icon: Code, label: 'Integrations' },
     { id: 'assets', icon: Package, label: 'Assets' },
     { id: 'monitoring', icon: Activity, label: 'AI Monitoring' },
     { id: 'reports', icon: FileText, label: 'Reports' },

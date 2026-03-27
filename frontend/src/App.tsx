@@ -3,6 +3,7 @@ import { Activity, Bell, Search, Zap, CheckCircle } from 'lucide-react';
 import Sidebar from './components/Sidebar';
 import StatCard from './components/StatCard';
 import AIAlerts from './components/AIAlerts';
+import IntegrationTools from './components/IntegrationTools';
 import axios from 'axios';
 
 const App: React.FC = () => {
@@ -54,69 +55,80 @@ const App: React.FC = () => {
           </div>
         </header>
 
-        {/* Dashboard Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <StatCard 
-            title="CPU Usage" 
-            value={systemStatus?.cpu_usage || "0%"} 
-            icon={<Activity className="text-primary" />} 
-            trend="+0.2%"
-            color="blue"
-          />
-          <StatCard 
-            title="Active Sensors" 
-            value={systemStatus?.active_monitors || 0} 
-            icon={<Zap className="text-yellow-400" />} 
-            trend="Normal"
-            color="yellow"
-          />
-          <StatCard 
-            title="ML Confidence" 
-            value="98.4%" 
-            icon={<CheckCircle className="text-secondary" />} 
-            trend="Stable"
-            color="emerald"
-          />
-          <StatCard 
-            title="System Load" 
-            value="Low" 
-            icon={<Zap className="text-zinc-400" />} 
-            trend="Optimal"
-            color="purple"
-          />
-        </div>
+        {/* Dashboard Content */}
+        {activeTab === 'dashboard' ? (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <StatCard 
+                title="CPU Usage" 
+                value={systemStatus?.cpu_usage || "0%"} 
+                icon={<Activity className="text-primary" />} 
+                trend="+0.2%"
+                color="blue"
+              />
+              <StatCard 
+                title="Active Sensors" 
+                value={systemStatus?.active_monitors || 0} 
+                icon={<Zap className="text-yellow-400" />} 
+                trend="Normal"
+                color="yellow"
+              />
+              <StatCard 
+                title="ML Confidence" 
+                value="98.4%" 
+                icon={<CheckCircle className="text-secondary" />} 
+                trend="Stable"
+                color="emerald"
+              />
+              <StatCard 
+                title="System Load" 
+                value="Low" 
+                icon={<Zap className="text-zinc-400" />} 
+                trend="Optimal"
+                color="purple"
+              />
+            </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* AI Monitoring Panel */}
-          <div className="lg:col-span-2 glass rounded-3xl p-6 glow min-h-[400px]">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-semibold flex items-center gap-2">
-                <Activity className="w-5 h-5 text-primary" /> Real-time AI Monitoring
-              </h2>
-              <button className="text-xs text-primary hover:underline">View Live Logs</button>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* AI Monitoring Panel */}
+              <div className="lg:col-span-2 glass rounded-3xl p-6 glow min-h-[400px]">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-xl font-semibold flex items-center gap-2">
+                    <Activity className="w-5 h-5 text-primary" /> Real-time AI Monitoring
+                  </h2>
+                  <button className="text-xs text-primary hover:underline">View Live Logs</button>
+                </div>
+                
+                <div className="h-64 flex items-end justify-between gap-1 mb-4 px-2">
+                  {[...Array(30)].map((_, i) => (
+                    <div 
+                      key={i} 
+                      className="w-full bg-primary/20 rounded-t-sm transition-all duration-500"
+                      style={{ height: `${Math.random() * 80 + 20}%` }}
+                    ></div>
+                  ))}
+                </div>
+                <div className="flex justify-around text-[10px] text-zinc-600 uppercase tracking-widest font-medium">
+                  <span>08:00 AM</span>
+                  <span>10:00 AM</span>
+                  <span>12:00 PM</span>
+                  <span>02:00 PM</span>
+                  <span>04:00 PM</span>
+                </div>
+              </div>
+
+              {/* Side AI Alerts */}
+              <AIAlerts />
             </div>
-            
-            <div className="h-64 flex items-end justify-between gap-1 mb-4 px-2">
-              {[...Array(30)].map((_, i) => (
-                <div 
-                  key={i} 
-                  className="w-full bg-primary/20 rounded-t-sm transition-all duration-500"
-                  style={{ height: `${Math.random() * 80 + 20}%` }}
-                ></div>
-              ))}
-            </div>
-            <div className="flex justify-around text-[10px] text-zinc-600 uppercase tracking-widest font-medium">
-              <span>08:00 AM</span>
-              <span>10:00 AM</span>
-              <span>12:00 PM</span>
-              <span>02:00 PM</span>
-              <span>04:00 PM</span>
-            </div>
+          </>
+        ) : activeTab === 'integrations' ? (
+          <IntegrationTools />
+        ) : (
+          <div className="flex flex-col items-center justify-center h-[60vh] text-zinc-500">
+            <h2 className="text-xl font-semibold mb-2">Page under development</h2>
+            <p>The "{activeTab}" view is coming soon.</p>
           </div>
-
-          {/* Side AI Alerts */}
-          <AIAlerts />
-        </div>
+        )}
       </main>
     </div>
   );
