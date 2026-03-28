@@ -1,5 +1,5 @@
 import React from 'react';
-import { Book, Terminal, Monitor, Box, Cloud, Activity, Code, Settings } from 'lucide-react';
+import { Book, Terminal, Box, Cloud, Activity, Code, Settings } from 'lucide-react';
 
 const Documentation: React.FC = () => {
   const sections = [
@@ -13,37 +13,37 @@ const Documentation: React.FC = () => {
       id: 'github-clone',
       icon: <Code className="w-5 h-5 text-blue-400" />,
       title: 'GitHub Clone',
-      content: 'Best for developers who want to customize the system. \\n\\n1. `git clone https://github.com/olivestackscode/facilitygrip.git`\\n2. Run the `setup.ps1` script to install all dependencies automatically.'
+      content: 'Best for developers who want to customize the system. \n\n1. `git clone https://github.com/olivestackscode/facilitygrip.git`\n2. Run the `setup.ps1` script to install all dependencies automatically.'
     },
     {
       id: 'windows-bash',
       icon: <Terminal className="w-5 h-5 text-emerald-400" />,
       title: 'Windows Bash/Bash Install',
-      content: 'For users who prefer a standard shell environment. \\n\\n1. Open your bash terminal (Git Bash or WSL).\\n2. Run `pip install -r backend/requirements.txt`\\n3. Run `npm install` inside the frontend directory.'
+      content: 'For users who prefer a standard shell environment. \n\n1. Open your bash terminal (Git Bash or WSL).\n2. Run `pip install -r backend/requirements.txt`\n3. Run `npm install` inside the frontend directory.'
     },
     {
       id: 'docker-install',
       icon: <Box className="w-5 h-5 text-cyan-400" />,
       title: 'Docker Installation',
-      content: 'The most reliable way to run the full stack (Recommended). \\n\\n1. Ensure Docker Desktop is running.\\n2. Run `docker-compose up --build` from the root directory.\\n3. Access the dashboard at `http://localhost`.'
+      content: 'The most reliable way to run the full stack (Recommended). \n\n1. Ensure Docker Desktop is running.\n2. Run `docker-compose up --build` from the root directory.\n3. Access the dashboard at `http://localhost`.'
     },
     {
       id: 'exe-install',
       icon: <Settings className="w-5 h-5 text-purple-400" />,
       title: '.exe Installation',
-      content: 'For standard PC installation without needing a terminal. \\n\\n1. Download the latest `FacilityGrip_Setup.exe`.\\n2. Run the installer and follow the on-screen prompts.\\n3. The system will be installed as a Windows service.'
+      content: 'For standard PC installation without needing a terminal. \n\n1. Download the latest `FacilityGrip_Setup.exe`.\n2. Run the installer and follow the on-screen prompts.\n3. The system will be installed as a Windows service.'
     },
     {
       id: 'api-integration',
       icon: <Code className="w-5 h-5 text-indigo-400" />,
       title: 'API Integration',
-      content: 'Integrate external sensors or third-party software. \\n\\nBase URL: `http://localhost:8000/api/v1`\\n\\nUse the `/ml/predict` endpoint to send raw sensor data to the AI engine for anomaly detection.'
+      content: 'Integrate external sensors or third-party software. \n\nBase URL: `http://localhost:8000/api/v1`\n\nUse the `/ml/predict` endpoint to send raw sensor data to the AI engine for anomaly detection.'
     },
     {
       id: 'remote-install',
       icon: <Cloud className="w-5 h-5 text-orange-400" />,
       title: 'Remote / Cloud Install',
-      content: 'Deploying to AWS, Azure, or private cloud servers. \\n\\nWe provide specialized Terraform templates and an Ansible playbook for remote orchestration. See the `/deploy` directory for cloud-specific configurations.'
+      content: 'Deploying to AWS, Azure, or private cloud servers. \n\nWe provide specialized Terraform templates and an Ansible playbook for remote orchestration. See the `/deploy` directory for cloud-specific configurations.'
     }
   ];
 
